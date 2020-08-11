@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/user/public_html/WearAMask/
+    - export DEPLOYPATH=/home/morenost/public_html/WearAMask/
     - /bin/cp -R * $DEPLOYPATH

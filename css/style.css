@@ -1,0 +1,40 @@
+/* General */
+*{
+    font-family: 'Nunito', sans-serif;
+}
+body{
+    background-image: url("../images/bg/bg.png");
+    background-color: ghostwhite;
+}
+.bold{
+    font-weight: bold;
+}
+
+/* Modals */
+.modal-title{
+    font-weight: bold;
+}
+.modal-footer{
+    font-weight: bold;
+}
+
+/* Game interface */
+#game-container{
+    margin:auto;
+}
+.btn-bold{
+    font-weight: bold;
+}
+
+/* Legacy classes */
+.selectable, .rebel-selectable{
+    cursor: pointer;
+}
+.selectable:hover, .rebel-selectable:hover{
+    opacity: .5;
+    filter: drop-shadow(0 0 0.75rem green);
+}
+
+.protected{
+    cursor: not-allowed;
+}

@@ -51,6 +51,12 @@ function infect(panelId){
             else if(gamestate==2){$('#modal-end').modal('toggle');}
             break;
 
+        case 'centralpark':
+            if(gamestate==2){rebel('ugpark');} // Rebels ugpark as well as default action
+
+        case 'hospital':
+            if(gamestate==2){rebel('ugpark');} // Rebels ugpark as well as default action
+
         default: // For a regular panel
 
             // Set panel as selected
@@ -176,7 +182,8 @@ function protect(panelId){
     if(!(selectablePanels.length>0)){
 
         // Trigger lose condition if no available moves left for player
-        $('#modal-lose').modal('toggle');
+        if(altLoseState == true){$('#modal-lose2').modal('toggle');} else {$('#modal-lose').modal('toggle');}
+        altLoseState = !altLoseState; // Switch to secondary alternative lose screen with a different hint for variety
         return;
     }
 }
@@ -208,7 +215,6 @@ function rebel(panelId){
 function resetGame(){
 
     for(const [key,value] of Object.entries(panels)){
-        console.log(`Resetting ${key}:`, document.getElementById(key))
         
         if(key == 'start'){continue;} // Skip start panel
 
@@ -226,8 +232,9 @@ function resetGame(){
         // Reset selectable panels list
         selectablePanels = [];
 
-        // Reset number of turns player has made in level 2
+        // Reset number of turns player and AI have made in level 2
         turnsMadeInLevel2 = -1;
+        firstAiTurn = true;
     }
         
 }
@@ -235,16 +242,27 @@ function resetGame(){
 // AI for level 2
 function AITurn(){
 
+    // Reduce the likelihood that the AI will repeat the first move it made last game
+    if(firstAiTurn){
+        if(healthyPanels[0] == lastFirstAiTurn){
+            shuffle(healthyPanels);
+            console.log(`Balanced randomness system changed ${lastFirstAiTurn} to ${healthyPanels[0]}`)
+        }
+        lastFirstAiTurn = healthyPanels[0];
+        firstAiTurn = false;
+    }
+
+    // Trigger lose condition if no available moves left for player
     if(!(selectablePanels.length>0)){
 
-        // Trigger lose condition if no available moves left for player
-        $('#modal-lose').modal('toggle');
+        if(altLoseState == true){$('#modal-lose2').modal('toggle');} else {$('#modal-lose').modal('toggle');}
+        altLoseState = !altLoseState; // Switch to secondary alternative lose screen with a different hint for variety
         return;
     }
 
+    // Anti-frustration system to prevent immediate loss
     if(healthyPanels.length>0){
 
-        // Anti-frustration system to prevent immediate loss
         while(
             turnsMadeInLevel2 == 1 
             &&
@@ -258,11 +276,12 @@ function AITurn(){
                 healthyPanels[0] == 'concrete'
             )
         ){
-            console.log('anti-frustration intervention')
-            shuffle(healthyPanels)
+            console.log('anti-frustration intervention');
+            shuffle(healthyPanels);
         }
 
-        // Better game play system to not have the joe pop up occur immediately on game start
+        // Better game play system to not have the joe pop up occur immediately on game start (obselete)
+        /*
         while(
             turnsMadeInLevel2 < 2
             &&
@@ -270,7 +289,8 @@ function AITurn(){
         ){
             console.log('anti joe confusion intervention')
             shuffle(healthyPanels);
-        }
+        } 
+        */
 
         // Protect the first panel in the randomised list of healthy panels
         console.log(`Possible moves: ${selectablePanels.length}, turns: ${turnsMadeInLevel2}, AI move: ${healthyPanels[0]}`)

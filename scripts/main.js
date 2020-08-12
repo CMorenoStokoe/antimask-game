@@ -17,6 +17,9 @@ This file is loaded by the web page on load.
     var turnsMadeInLevel2 = -1; // Turns made in level 2 (used to time protection moves by the AI); starts on -1 to account for initialisation action taken for player
     var healthyPanels = []; // List of healthy panels on map, for AI to select random healthy areas to protect
     var selectablePanels = []; // List of selectable panels, for game to determine end state
+    var altLoseState = false; // Trigger a second lose message for variety on multiple losses
+    var firstAiTurn = true; // Record first AI turn each game, to prevent it from repeating this move next game
+    var lastFirstAiTurn = null; // Record first AI turn each game, to reduce the likelihood it repeats this move next game
 
     // Initialise game
     initialiseGame(); // Make first panel selectable, enabling gameplay
@@ -36,6 +39,10 @@ This file is loaded by the web page on load.
         initialiseGame();
     })
     $('#modal-lose').on('hidden.bs.modal', function (e) { // Dismissing lose modal restarts level 2
+        turnsMadeInLevel2=-1;
+        initialiseGame();
+    })
+    $('#modal-lose2').on('hidden.bs.modal', function (e) { // Dismissing lose modal restarts level 2
         turnsMadeInLevel2=-1;
         initialiseGame();
     })
@@ -161,8 +168,8 @@ This file is loaded by the web page on load.
         // Add all panels to healthy list
         for(const [key, value] of Object.entries(panels)){
 
-            // Do not add start or end panels
-            if(key == 'start' || key == 'nehousing' || key == 'end'){continue;}
+            // Do not add start or end panels, and leave ugpark for special activation on Joe event
+            if(key == 'start' || key == 'nehousing' || key == 'end' || key == 'ugpark'){continue;}
 
             // Push panel to array
             healthyPanels.push(key);

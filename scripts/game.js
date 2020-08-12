@@ -52,10 +52,30 @@ function infect(panelId){
             break;
 
         case 'centralpark':
-            if(gamestate==2){rebel('ugpark');} // Rebels ugpark as well as default action
+            if(gamestate==2){rebel('ugpark');} // Rebels ugpark 
+
+            // Set panel as selected
+            setSelected(panelId);
+
+            // Make neighbouring areas selectable
+            setNeighbours(panelId); 
+            
+            // If level 2 then make AI protection turn
+            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            break;
 
         case 'hospital':
-            if(gamestate==2){rebel('ugpark');} // Rebels ugpark as well as default action
+            if(gamestate==2){rebel('ugpark');} // Rebels ugpark
+
+            // Set panel as selected
+            setSelected(panelId);
+
+            // Make neighbouring areas selectable
+            setNeighbours(panelId); 
+            
+            // If level 2 then make AI protection turn
+            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            break;
 
         default: // For a regular panel
 
@@ -190,7 +210,7 @@ function protect(panelId){
 
 // Function to attempt to protect an area but have the inhabitant rebel and not wear a mask, allowing infection as normal
 function rebel(panelId){
-
+    console.log('rebelling', panelId)
     // Get panel img element on dom by its Id
     var panel = document.getElementById(panelId);
     

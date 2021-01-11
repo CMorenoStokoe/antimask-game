@@ -10,6 +10,9 @@ This file is called by the main script.
 
 */
 
+// Second temp var used by ai in lvl 2 for same purpose as similar var in main script
+var aiTurns=0; 
+
 // Dict of panels and neighboring areas you can infect from them
 const panels = {
     'start' : ['nehousing',],
@@ -37,7 +40,7 @@ function infect(panelId){
             setNeighbours('start'); 
             
             // If level 2 then make AI protection turn
-            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            if(gamestate == 2){AITurn()}; 
 
             break;
         
@@ -52,7 +55,6 @@ function infect(panelId){
             break;
 
         case 'centralpark':
-            if(gamestate==2){rebel('ugpark');} // Rebels ugpark 
 
             // Set panel as selected
             setSelected(panelId);
@@ -61,11 +63,10 @@ function infect(panelId){
             setNeighbours(panelId); 
             
             // If level 2 then make AI protection turn
-            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            if(gamestate == 2){AITurn()}; 
             break;
 
         case 'hospital':
-            if(gamestate==2){rebel('ugpark');} // Rebels ugpark
 
             // Set panel as selected
             setSelected(panelId);
@@ -74,7 +75,7 @@ function infect(panelId){
             setNeighbours(panelId); 
             
             // If level 2 then make AI protection turn
-            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            if(gamestate == 2){AITurn()}; 
             break;
 
         default: // For a regular panel
@@ -86,7 +87,7 @@ function infect(panelId){
             setNeighbours(panelId); 
             
             // If level 2 then make AI protection turn
-            if(gamestate == 2){AITurn(turnsMadeInLevel2)}; 
+            if(gamestate == 2){AITurn()}; 
 
             break;
     }
@@ -101,7 +102,7 @@ function infect(panelId){
         // Replace image with infected version
         switch(panel.className){
             case 'rebel-selectable': // Joe's central park tile is the only protected tile which can be infected, so handle differently
-                panel.src = panel.src.replace('protected', 'infected');
+                panel.src = panel.src.replace('rebelled', 'infected');
                 break;
             
             case 'selectable': // All healthy panels
@@ -173,10 +174,8 @@ function infect(panelId){
 }
 
 // Function to 'protect' an area and prevent infecting this area (e.g., wearing masks); changes the image and makes it unselectable
+isSecondPlay=false;
 function protect(panelId){
-
-    // If joe's rebel park panel, then rebel instead of protect
-    if(panelId == 'ugpark'){rebel(panelId); return;}
     
     // Get panel img element on dom by its Id
     var panel = document.getElementById(panelId);
@@ -196,15 +195,16 @@ function protect(panelId){
     removeFromArray(healthyPanels, panelId);
 
     // Remove from selectable panels list
-    if(selectablePanels.includes(panelId)){removeFromArray(selectablePanels, panelId)}
+    if(selectablePanels.includes(panelId)){ removeFromArray(selectablePanels, panelId) }
 
     // If last available panel was protected, trigger lose state
-    if(!(selectablePanels.length>0)){
+    if(!(isSecondPlay)){
 
-        // Trigger lose condition if no available moves left for player
-        if(altLoseState == true){$('#modal-lose2').modal('toggle');} else {$('#modal-lose').modal('toggle');}
-        altLoseState = !altLoseState; // Switch to secondary alternative lose screen with a different hint for variety
-        return;
+        if(!(selectablePanels.length>0)){ 
+            setTimeout(function(){
+                startSecondPlaythrough();
+            }, 1500)
+        };
     }
 }
 
@@ -215,7 +215,7 @@ function rebel(panelId){
     var panel = document.getElementById(panelId);
     
     // Replace image with infected version
-    panel.src = panel.src.replace('normal', 'protected');
+    panel.src = panel.src.replace('normal', 'rebelled');
     
     // Set class as rebel or rebel selectable depending on whether the player can select it
     if(document.getElementById('centralpark').className == 'infected' || document.getElementById('hospital').className == 'infected' || document.getElementById('school').className == 'infected'){
@@ -226,14 +226,15 @@ function rebel(panelId){
     
     // Remove from healthy panels list
     removeFromArray(healthyPanels, panelId);
-
-    // Pop up modal
-    $('#modal-opportunity').modal('toggle');
 }
 
 // Function to reset the game
 function resetGame(){
 
+    // Reset moves 
+    aiTurns = 0;
+
+    // Reset panels
     for(const [key,value] of Object.entries(panels)){
         
         if(key == 'start'){continue;} // Skip start panel
@@ -260,65 +261,28 @@ function resetGame(){
 }
 
 // AI for level 2
+aiMoves=['concrete', 'hospital', 'school', 'ugpark']
 function AITurn(){
 
-    // Reduce the likelihood that the AI will repeat the first move it made last game
-    if(firstAiTurn){
-        if(healthyPanels[0] == lastFirstAiTurn){
-            shuffle(healthyPanels);
-            console.log(`Balanced randomness system changed ${lastFirstAiTurn} to ${healthyPanels[0]}`)
+    console.log(aiTurns)
+
+    // Rebel ugpark on second playthrough instead of protecting it
+    if(isSecondPlay){
+        if(aiTurns===0){
+            rebel('ugpark');
         }
-        lastFirstAiTurn = healthyPanels[0];
-        firstAiTurn = false;
+        if(aiTurns===3){
+            return;
+        }
     }
 
     // Trigger lose condition if no available moves left for player
-    if(!(selectablePanels.length>0)){
+    if(!(selectablePanels.length>0)){  startSecondPlaythrough(); } 
+    
+    // Else play AI turn
+    protect(aiMoves[aiTurns]);
 
-        if(altLoseState == true){$('#modal-lose2').modal('toggle');} else {$('#modal-lose').modal('toggle');}
-        altLoseState = !altLoseState; // Switch to secondary alternative lose screen with a different hint for variety
-        return;
-    }
-
-    // Anti-frustration system to prevent immediate loss
-    if(healthyPanels.length>0){
-
-        while(
-            turnsMadeInLevel2 == 1 
-            &&
-            (
-                !(healthyPanels.includes('northpark')) ||
-                !(healthyPanels.includes('concrete'))
-            )
-            &&
-            (
-                healthyPanels[0] == 'northpark' || 
-                healthyPanels[0] == 'concrete'
-            )
-        ){
-            console.log('anti-frustration intervention');
-            shuffle(healthyPanels);
-        }
-
-        // Better game play system to not have the joe pop up occur immediately on game start (obselete)
-        /*
-        while(
-            turnsMadeInLevel2 < 2
-            &&
-            healthyPanels[0] == 'ugpark'
-        ){
-            console.log('anti joe confusion intervention')
-            shuffle(healthyPanels);
-        } 
-        */
-
-        // Protect the first panel in the randomised list of healthy panels
-        console.log(`Possible moves: ${selectablePanels.length}, turns: ${turnsMadeInLevel2}, AI move: ${healthyPanels[0]}`)
-        protect(healthyPanels[0]);
-
-        return;
-        
-    } 
+    aiTurns++;
 }
 
 // Fisher-Yates shuffle algorithm (https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm)
@@ -339,4 +303,15 @@ function removeFromArray(array, item){
     if (index > -1) {
       array.splice(index, 1);
     }
+}
+
+function startSecondPlaythrough(){
+    isSecondPlay = true;
+
+    $('#modal-lose').modal('toggle');
+}
+
+// Quick message
+function showMessage(tile){
+    console.log('Government vaccinated ', tile)
 }

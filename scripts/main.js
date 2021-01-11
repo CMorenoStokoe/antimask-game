@@ -169,13 +169,13 @@ This file is loaded by the web page on load.
         for(const [key, value] of Object.entries(panels)){
 
             // Do not add start or end panels, and leave ugpark for special activation on Joe event
-            if(key == 'start' || key == 'nehousing' || key == 'end' || key == 'ugpark'){continue;}
+            //if(key == 'start' || key == 'nehousing' || key == 'end' || key == 'ugpark'){continue;}
 
             // Push panel to array
             healthyPanels.push(key);
         } 
 
         // Shuffle list of healthy panels for randomness
-        shuffle(healthyPanels);
-        console.log(`Randomised healthyPanels list: `, healthyPanels)
+        //shuffle(healthyPanels);
+        //console.log(`Randomised healthyPanels list: `, healthyPanels)
     }

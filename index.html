@@ -156,100 +156,43 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body text-center">            
+          <div class="modal-body text-center">       
             <p>
-              <strong>Everyone around you are wearing masks so you can't infect anyone else. Try again!</strong>
+              Good job but you were only able to infect a few areas because everyone around you started wearing masks <i class="fas fa-head-side-mask"></i>.
+              <br>
+              This stopped 
+              <a href='https://www.england.nhs.uk/coronavirus/primary-care/about-covid-19/virus-transmission/' target='_blank'>droplet </a>  
+              and 
+              <a href='https://www.leeds.ac.uk/news/article/4626/aerosol_transmission_may_spread_covid-19' target='_blank'>aerosol </a> 
+              particles from infecting people just by breathing even if you have no symptoms
               <br><br>
-              <i class="fas fa-head-side-mask"></i> Masks are not a replacement for social distancing but they do make it much harder 
-              for you to be infected. 
-              <br><br>            
+            </p>
+
+            <img src='images/ui/mask.gif' class='m-auto p-2' style='display: block; max-height: 200px; width: auto; border-radius: 5px;'>
+
+            <p> Let's try again but this time <strong style='color:orangered'>Joe</strong> will refuse to wear his mask. </p>
+
+            <p>
+              This is especially important indoors and when you are close to people. You can infect people even if you have no symptoms.
+              <br><br>
+              <i class="fas fa-viruses"></i> <strong style='color:orangered'>Joe</strong> isn't wearing his mask
+              so you can <br>
             </p>
 
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" style='font-weight: normal;'>
+
+          <div class='d-flex flex-column align-items-center justify-content-center'>
+            <img src='images/ui/joe.jpg' style='max-height: 75px; border-radius: 5%; margin:auto;'>
+            <p>This is <strong style='color:orangered'>Joe</strong>. </p>
+            <p>Joe is not exempt from wearing a mask, he just doesn't want to.</p>
+            <em><i class="fas fa-viruses"></i> Find <strong style='color:orangered'>Joe</strong> to keep your infection going!</em>
+          </div>
             
-            <div class='row' style='font-weight: normal;'>
-              <div class='col-sm-2 mx-auto my-auto text-center'>
-                <img src='images/ui/joe.jpg' style='max-height: 75px; border-radius: 5%; margin:auto;'>
-              </div>
-              <div class='col-sm-10 mx-auto my-auto text-center'>
-                <i class="fas fa-viruses"></i> <strong>Hint:</strong> <strong style='color:orangered'>Joe</strong> is on your side.
-                <strong style='color:orangered'>Joe</strong> is not exempt from wearing a mask, he just doesn't want to wear one. 
-                You can always infect him so try to find paths to reach him!<br>
-              </div>
-            </div>
-              
-            <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-lose'>Retry</button>
+          <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-lose'>Retry</button>
           </div>
         </div>
       </div>
-  </div>
-
-  
-  <!-- Lose modal 2 -->
-  <div class="modal" tabindex="-1" id='modal-lose2'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h5 class="modal-title w-100">Trapped! <i class="fas fa-virus-slash"></i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center">            
-          <p>
-            <strong>
-              Everyone around you are wearing masks so you can't infect anyone else. Try again!
-            </strong>
-            <br><br>
-            <i class="fas fa-robot"></i> People's behaviour is unpredictable and so it may take a few tries to beat the randomness!
-          </p>
-
-        </div>
-        <div class="modal-footer">
-          <img src='images/ui/concrete-to-park.gif' style='max-height: 150px; border-radius: 5%; margin: auto;'> 
-          <p class=' text-center' style='font-weight: normal;'>
-            <i class="fas fa-viruses"></i> Hint: You can reach the central park area from the concrete highrise area.
-          </p>
-          <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-lose2'>Retry</button>
-        </div>
-      </div>
-    </div>
-</div>
-
-  <!-- Opportunity modal -->
-  <div class="modal" tabindex="-1" id='modal-opportunity'>
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <img src='images/ui/warning-sign.jpg' class='m-auto p-2' style='height: 50px; width: auto;'>
-          <h5 class='bold p-2' style='display: inline-block;'>
-            Anti-Masker
-          </h5>
-          <img src='images/ui/warning-sign.jpg' class='m-auto p-2' style='height: 50px; width: auto;'>
-          <p>
-            When you wear a mask you limit 
-            <a href='https://www.england.nhs.uk/coronavirus/primary-care/about-covid-19/virus-transmission/' target='_blank'>droplet </a>  
-            and 
-            <a href='https://www.leeds.ac.uk/news/article/4626/aerosol_transmission_may_spread_covid-19' target='_blank'>aerosol </a> 
-            particles spread when you breath, talk, cough and sneeze:
-          </p>
-          <img src='images/ui/mask.gif' class='m-auto p-2' style='display: block; max-height: 200px; width: auto; border-radius: 5px;'>
-          <p>
-            This is especially important indoors and when you are close to people. You can infect people even if you have no symptoms.
-            <br><br>
-            <i class="fas fa-viruses"></i> <strong style='color:orangered'>Joe</strong> isn't wearing his mask
-            so you can infect his area through 
-            
-            <a href='https://www.england.nhs.uk/coronavirus/primary-care/about-covid-19/virus-transmission/' target='_blank'>droplet </a>  
-            and 
-            <a href='https://www.leeds.ac.uk/news/article/4626/aerosol_transmission_may_spread_covid-19' target='_blank'>aerosol </a> 
-            particles.<br>
-          </p>
-          <button type="button" class="btn btn-warning btn-bold mt-2" data-dismiss="modal" id='modal-btn-opportunity'>Continue</button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- End debrief modal -->

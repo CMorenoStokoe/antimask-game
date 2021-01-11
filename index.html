@@ -18,15 +18,15 @@
     <!-- Style -->
     <link href="css/style.css" rel="stylesheet">
 
-    <title>Wear A Mask</title>
-    <link rel="icon" type="image/png" href="images/promo/favicon.png"/>
+    <title>COVID Anti-Vaxx</title>
+    <link rel="icon" type="image/png" href="images/favicons/icon.PNG"/>
     
     <!-- Facebook share properties: https://developers.facebook.com/docs/sharing/webmasters -->
-    <meta property="og:url"           content="https://www.morenostok.io/WearAMask/" />
+    <meta property="og:url"           content="https://www.morenostok.io/COVID-19/VaccineGame/" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Anti-Mask Game" />
-    <meta property="og:description"   content="This game demonstrates the importance of wearing a mask in preventing spreading illness." />
-    <meta property="og:image"         content="https://www.morenostok.io/anti-mask/images/promo/preview.jpg" />
+    <meta property="og:title"         content="COVID Vaccine Game" />
+    <meta property="og:description"   content="The COVID-19 vaccine saves lives. This game shows how vaccines prevent diseases from spreading." />
+    <meta property="og:image"         content="https://www.morenostok.io/COVID-19/VaccineGame/images/promo/touchdemo.gif" />
     <!-- Facebook SDK -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0" nonce="TpUxQNgA"></script>
@@ -40,34 +40,86 @@
       <div class="modal-dialog">
         <div class="modal-content" style='border: none;'>
             <div class="modal-header text-center" style='border-bottom: none;'>
-              <h5 class="modal-title w-100">Anti-Mask: The Game</h5>
+              <h5 class="modal-title w-100">COVID-19 Anti-Vaxx: The Game</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body text-center">
 
-            <p>
-              This game demonstrates how if you don't wear a mask you can infect people, even if you've never met them. 
-            </p>
+            <div class='d-flex flex-column justify-content-center align-items-center'>
 
-            <div class='row'>
-              <div class='col-sm-6 mx-auto my-auto'>
-                <p>
-                  <i class="fas fa-viruses"></i> Your goal is to spread an infection from the <strong>start</strong> at one town to another town at the <strong>end</strong>.
-                </p>
-              </div>
-              <div class='col-sm-6 mx-auto my-auto'>
-                <img src='images/ui/map-intro.gif' class='m-auto p-2' style='display: block; height: 300px; width: auto; border-radius: 5%;'>  
-              </div>
+              <p style='font-size: 1.5rem;'>
+                <i class="fas fa-virus-slash text-primary"></i>
+                <i class="fas fa-virus-slash text-primary"></i>
+                <i class="fas fa-virus text-danger"></i>
+                <i class="fas fa-virus-slash text-primary"></i>
+              </p>
+
+              <p>
+                This game demonstrates how <span class='text-danger'>Anti-Vaccination</span> movements could cost lives during the COVID-19 pandemic.
+              </p>
+  
+              <p> The COVID-19 vaccination will help achieve 
+                <a href='https://www.who.int/news-room/q-a-detail/herd-immunity-lockdowns-and-covid-19'>herd immunity</a> 
+                to <strong>keep everyone safe</strong>, especially those 
+                <a href='https://www.nhs.uk/conditions/coronavirus-covid-19/people-at-higher-risk/whos-at-higher-risk-from-coronavirus/'>
+                  most at risk</a>.
+              </p>
+  
+              <p> 
+                It is important to vaccinate as many people as possible because 
+                <a href='https://coronavirusexplained.ukri.org/en/article/und0006/'> 
+                you can carry COVID-19 to other people</a>.
+              </p>
             </div>
 
           </div>
+
           <div class="modal-footer" style='border-top: none;'>
-              <button type="button" class="btn btn-lg btn-warning m-auto" data-dismiss="modal" id='modal-btn-start'><i class="fas fa-gamepad" style='font-size: 2rem;'></i></button>
+              <p class='text-center p-2'>
+                This game is designed to show how you can infect others around you, even people you've never directly met. 
+              </p>  
+              <button type="button" class="btn btn-lg btn-warning m-auto" data-dismiss="modal" id='modal-btn-start'>Okay. How do I win?</button>
           </div>
         </div>
       </div>
+  </div>
+
+
+  <!-- How the game plays modal -->
+  <div class="modal" tabindex="-1" id='modal-aim' >
+    <div class="modal-dialog">
+      <div class="modal-content" style='border: none;'>
+          <div class="modal-header text-center" style='border-bottom: none;'>
+            <h5 class="modal-title w-100">How do I win?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+
+          <div class='d-flex flex-column justify-content-center align-items-center'>
+
+          <div class='row'>
+            <div class='col-sm-6 mx-auto my-auto'>
+              <p>
+                <i class="fas fa-viruses"></i> Your goal is to spread an infection from the <strong>start</strong> 
+                in one town to another town at the <strong>end</strong>.
+              </p>
+            </div>
+            <div class='col-sm-6 mx-auto my-auto'>
+              <img src='images/ui/map-intro.gif' class='m-auto p-2' style='display: block; height: 300px; width: auto; border-radius: 5%;'>  
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer" style='border-top: none;'>
+            <button type="button" class="btn btn-lg btn-warning m-auto" data-dismiss="modal" id='modal-btn-start'>How do I infect areas?</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- Start how to play modal -->
@@ -75,7 +127,7 @@
       <div class="modal-dialog">
         <div class="modal-content" style='border: none;'>
             <div class="modal-header text-center" style='border-bottom: none;'>
-              <h5 class="modal-title w-100">Anti-Mask: The Game</h5>
+              <h5 class="modal-title w-100">How to play</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -85,7 +137,6 @@
             <div class='row'>
               <div class='col-md-5 mx-auto my-auto'>
                 <p>
-                  <strong>How to play:</strong><br>
                   <i class="far fa-hand-point-up"></i> Press an area to <strong style='color:crimson'>infect</strong> it.
                   <br><br>
                   <i class="fas fa-viruses"></i> You can only infect areas next to areas you've already infected.
@@ -98,7 +149,7 @@
 
           </div>
           <div class="modal-footer" style='border-top: none;'>
-              <button type="button" class="btn btn-lg btn-warning m-auto" data-dismiss="modal" id='modal-btn-start'><i class="fas fa-gamepad" style='font-size: 2rem;'></i></button>
+              <button type="button" class="btn btn-lg btn-warning m-auto" data-dismiss="modal" id='modal-btn-start'>Start <i class="fas fa-gamepad" style='font-size: 2rem;'></i></button>
           </div>
         </div>
       </div>
@@ -115,31 +166,23 @@
             </button>
           </div>
           <div class="modal-body" >
-
-            <div class='row'>
+            <div class='d-flex flex-column justify-content-center align-items-center'>
+              <p>Well done you infected the next town!...</p>
               <p class='mx-auto my-auto text-center'>
-                Well done you reached the next town but the government has noticed your <strong style='color: crimson'>infection</strong>.
+                However, the government has noticed your 
+                <strong style='color: crimson'>infection</strong> 
+                and will start 
+                <strong style='color: cornflowerblue'>vaccinating</strong> people.  
+                
+                <br><br>
               </p>
-            </div>
-            
-            <div class='row'>
-              <div class='col-sm-6 mx-auto my-auto'>
-                <p>
-                  <img src='images/ui/ai-randomness.gif' class='mx-auto p-2' style='display:block; max-height: 300px; width: auto; border-radius: 5%;'>
-                </p>
-              </div>
-              <div class='col-sm-6 mx-auto my-auto text-center'>
-                <p>
-                  <i class="fas fa-head-side-mask"></i> Each time you infect an area, the computer will now protect another area at random by 
-                  enforcing <strong style='color: cornflowerblue'>mask</strong> wearing. You can't infect these areas.
-                  <br><br>
-                  <strong>Try not to get trapped in with nowhere to infect!</strong>
-                </p>
-              </div>
-            </div>
 
+              <img src='images/ui/ai-randomness_cropped.gif' class='mx-auto p-2' style='display:block; max-height: 300px; width: auto; border-radius: 5%;'>
+
+            </div>
           </div>
           <div class="modal-footer">
+              <p>Hint: It will be too difficult for you to infect <strong style='color: cornflowerblue'>vaccinated</strong> areas!</p>
               <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-win'>Continue</button>
           </div>
         </div>
@@ -151,45 +194,35 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header text-center">
-            <h5 class="modal-title w-100">Trapped! <i class="fas fa-virus-slash"></i></h5>
+            <h5 class="modal-title w-100">Infection contained! <i class="fas fa-virus-slash"></i></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body text-center">       
+          <div class="modal-body text-center">
             <p>
-              Good job but you were only able to infect a few areas because everyone around you started wearing masks <i class="fas fa-head-side-mask"></i>.
-              <br>
-              This stopped 
+              Good job but you were only able to infect a few areas because everyone around you was <strong style='color: cornflowerblue'>vaccinated</strong>!
+              <i class="fas fa-virus-slash"></i>.
+              <br><br>
+              Vaccinations combined with mask <i class="fas fa-head-side-mask"></i> wearing stops diseases from spreading 
               <a href='https://www.england.nhs.uk/coronavirus/primary-care/about-covid-19/virus-transmission/' target='_blank'>droplet </a>  
               and 
               <a href='https://www.leeds.ac.uk/news/article/4626/aerosol_transmission_may_spread_covid-19' target='_blank'>aerosol </a> 
-              particles from infecting people just by breathing even if you have no symptoms
-              <br><br>
-            </p>
-
-            <img src='images/ui/mask.gif' class='m-auto p-2' style='display: block; max-height: 200px; width: auto; border-radius: 5px;'>
-
-            <p> Let's try again but this time <strong style='color:orangered'>Joe</strong> will refuse to wear his mask. </p>
-
-            <p>
-              This is especially important indoors and when you are close to people. You can infect people even if you have no symptoms.
-              <br><br>
-              <i class="fas fa-viruses"></i> <strong style='color:orangered'>Joe</strong> isn't wearing his mask
-              so you can <br>
+              particles
             </p>
 
           </div>
           <div class="modal-footer" style='font-weight: normal;'>
 
           <div class='d-flex flex-column align-items-center justify-content-center'>
+            <p> You might need a little help to keep your infection going... </p>
             <img src='images/ui/joe.jpg' style='max-height: 75px; border-radius: 5%; margin:auto;'>
-            <p>This is <strong style='color:orangered'>Joe</strong>. </p>
-            <p>Joe is not exempt from wearing a mask, he just doesn't want to.</p>
-            <em><i class="fas fa-viruses"></i> Find <strong style='color:orangered'>Joe</strong> to keep your infection going!</em>
+            <p>Meet <strong style='color:orangered'>Joe</strong>. </p>
+            <p>Joe will refuse his vaccination because he doesn't think vaccines work.</p>
+            <em><i class="fas fa-viruses"></i> Find and infect <strong style='color:orangered'> Joe</strong>!</em>
           </div>
             
-          <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-lose'>Retry</button>
+          <button type="button" class="btn btn-warning btn-bold" data-dismiss="modal" id='modal-btn-lose'>Continue</button>
           </div>
         </div>
       </div>
@@ -207,8 +240,8 @@
           </div>
           <div class="modal-body text-center">
             <p>
-              If Joe had worn his mask, the infection would not have been able to spread.
-              Hopefully this game has helped demonstrate how masks protect everyone, including people we've never met.
+              If Joe had accepted his vaccination, the infection would have stayed in just a few areas and not spread further. 
+              Hopefully this game has helped demonstrate how vaccines protect everyone, including people we've never met.
               <br><br>
               
               <strong>If you enjoyed this game, please share it! <i class="fas fa-comment-dots"></i></strong><br>
@@ -217,43 +250,42 @@
             <div class='d-flex flex-row justify-content-center align-items-start'>
                 
               <!-- Fb share button -->
-              <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmorenostok.io%2FWearAMask&width=100&layout=button&action=like&size=large&share=true&height=65&appId" width="150" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+              <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fmorenostok.io%2FCOVID-19%2FVaccineGame&width=100&layout=button&action=like&size=large&share=true&height=65&appId" width="150" height="65" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
               
               <!-- Twitter share button -->
               <a id='twitter-share' class="twitter-share-button"
               href="https://twitter.com/intent/tweet?text=
-                Not sure about masks%3F Play Anti-Mask to learn a bit about why they're so important!
+                Play COVID-19 Anti-Vaxx: The Game to learn a bit about why COVID-19 vaccinations are so important!
               "
               data-size="large">
               Tweet</a>
             
               <!-- Email share button -->
-              <a class='btn btn-success mx-2' style='padding: 2px 4px 2px 4px; color: white;' href="mailto:?subject=Anti-Mask: The Game&amp;body=Play Anti-Mask to learn a bit about why they're so important! https://www.morenostok.io/WearAMask/"
+              <a class='btn btn-success mx-2' style='padding: 2px 4px 2px 4px; color: white;' 
+              href="mailto:?subject=COVID-19 Anti-Vaxx: The Game&amp;body=Play COVID-19 Anti-Vaxx: The Game to learn a bit about why vaccines are so important! https://www.morenostok.io/COVID-19/VaccineGame/"
                 title="Share by Email">
                 Email <i class="far fa-envelope" style='font-size: 1rem;'></i>
               </a>
               
               <!-- URL share button -->
-              <a tabindex='0' class="btn btn-danger mx-2" style='padding: 2px;' data-toggle="popover" title="Copied URL to clipboard:" data-content="https://www.morenostok.io/WearAMask/"  id='copyButton' data-placement='bottom'>Share link <i class="fas fa-share-alt"></i></a>
+              <a tabindex='0' class="btn btn-danger mx-2" style='padding: 2px;' data-toggle="popover" title="Copied URL to clipboard:" data-content="https://www.morenostok.io/COVID-19/VaccineGame"  id='copyButton' data-placement='bottom'>Share link <i class="fas fa-share-alt"></i></a>
 
             </div>
           </div>
           <div class="modal-footer text-center">
               <small>Disclaimer: 
                 <em>
-                  It is important to consider and be respectful that not everyone can wear a mask due to physical or health reasons.
+                  It is important to consider and be respectful that not everyone will be offered the COVID-19 vaccine. 
                   This game is not intended to replace professional advice for COVID-19. 
                   <a href='https://www.gov.uk/coronavirus'>Please visit information pages here for up-to-data guidelines and advice.</a>
                 </em>
               </small>
               <small class="text-center">
                 Thank you to <a href='https://www.freepik.com/macrovector'>Macrovector</a> 
-                and <a href='https://www.freepik.com/freepik'>Freepik</a> for providing the assets for this game,
-                and to <a href='https://www.lavision.de/'>LaVision</a> for their demonstration of 
-                <a href='https://www.lavision.de/en/news/2020/4302/' target='_blank'>mask effectiveness</a>
+                and <a href='https://www.freepik.com/freepik'>Freepik</a> for providing assets for this game.
               </small>
               <br>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" id='modal-btn-end'>Replay <i class="fas fa-undo-alt"></i></button>
+              <button type="button" class="btn btn-secondary" onclick='location.reload(); return false;' data-dismiss="modal" id='modal-btn-end'>Replay <i class="fas fa-undo-alt"></i></button>
           </div>
         </div>
       </div>

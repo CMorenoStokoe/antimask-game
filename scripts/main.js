@@ -29,6 +29,9 @@ This file is loaded by the web page on load.
         gamestate++; 
         initialiseGame();
     })
+    $('#modal-aim').on('hidden.bs.modal', function (e) { // Dismissing start modal starts game
+        $('#modal-start').modal('toggle');
+    })
     // Assign failsafe functions which occur on modal dismiss (by 'x' button, tapping outside the modal area or pressing the intended button)
     $('#modal-start').on('hidden.bs.modal', function (e) { // Dismissing start modal starts game
         gamestate++; 
@@ -137,7 +140,7 @@ This file is loaded by the web page on load.
                 break;
 
             case 0: // Open how to play after welcome
-                $('#modal-start').modal('toggle');
+                $('#modal-aim').modal('toggle');
                 break;
 
             case 1: // Initialise game by infecting the starting panel
